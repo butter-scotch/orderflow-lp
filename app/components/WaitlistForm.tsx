@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
 // ← 自分のメールアドレスに差し替える（Formsubmit.co が最初の登録時に確認メールを送ります）
-const FORMSUBMIT_EMAIL = 'YOUR_EMAIL@gmail.com';
+const FORMSUBMIT_EMAIL = 'shoma.hashimoto.34@gmail.com';
 
-export default function WaitlistForm() {
+export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -47,7 +47,7 @@ export default function WaitlistForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder='your@email.com'
-          className='flex-1 px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+          className={`flex-1 px-4 py-3 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 border ${dark ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500' : 'border-gray-200 bg-white text-gray-900'}`}
         />
         <button
           type='submit'
