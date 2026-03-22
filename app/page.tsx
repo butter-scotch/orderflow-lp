@@ -1,7 +1,7 @@
 import { ArrowRight, Package, Clock, AlertCircle, ExternalLink, Users } from 'lucide-react';
 
 // ── 差し替える箇所 ───────────────────────────────────────────
-const GOOGLE_FORM_URL = 'https://forms.gle/YOUR_FORM_ID'; // Google フォーム URL
+const GOOGLE_FORM_URL = 'https://forms.gle/b3uvChSz5cQTLMEw5'; // Google フォーム URL
 const LINKEDIN_URL = 'https://www.linkedin.com/in/shoma-hashimoto/?locale=en-US'; // LinkedIn URL
 const YOUR_NAME = 'Shoma Hashimoto'; // 表示名
 
