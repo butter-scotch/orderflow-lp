@@ -1,33 +1,29 @@
-import { ArrowRight, Package, Clock, AlertCircle, ExternalLink, Users } from 'lucide-react';
+import { Package, Clock, AlertCircle, ExternalLink, Users } from 'lucide-react';
+import WaitlistForm from './components/WaitlistForm';
 
 // ── 差し替える箇所 ───────────────────────────────────────────
-const GOOGLE_FORM_URL = 'https://forms.gle/b3uvChSz5cQTLMEw5'; // Google フォーム URL
-const LINKEDIN_URL = 'https://www.linkedin.com/in/shoma-hashimoto/?locale=en-US'; // LinkedIn URL
-const YOUR_NAME = 'Shoma Hashimoto'; // 表示名
+const GOOGLE_FORM_URL = 'https://forms.gle/b3uvChSz5cQTLMEw5'; // アンケート URL
+const LINKEDIN_URL = 'https://www.linkedin.com/in/shoma-hashimoto/?locale=en-US';
+const YOUR_NAME = 'Shoma Hashimoto';
 
-// ウェイティングリスト人数（Google フォーム登録者が増えたらここを更新）
-// ※ 実際の登録者数 + 3（初期シード値）を手動で更新する
+// 登録者数（Google フォームやメール登録が増えたら手動で更新）
 const WAITLIST_COUNT = 3;
 // ────────────────────────────────────────────────────────────
 
 export default function Home() {
   return (
     <main className='min-h-screen bg-white text-gray-900'>
+
       {/* Nav */}
       <nav className='flex items-center justify-between px-6 py-4 max-w-4xl mx-auto'>
         <span className='font-bold text-lg'>OrderFlow</span>
-        <a
-          href={GOOGLE_FORM_URL}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='text-sm font-medium text-indigo-600 hover:underline'
-        >
+        <a href='#waitlist' className='text-sm font-medium text-indigo-600 hover:underline'>
           Join waitlist →
         </a>
       </nav>
 
       {/* Hero */}
-      <section className='px-6 pt-20 pb-16 max-w-3xl mx-auto text-center'>
+      <section id='waitlist' className='px-6 pt-20 pb-16 max-w-3xl mx-auto text-center'>
         <h1 className='text-4xl sm:text-5xl font-extrabold leading-tight mb-6'>
           Stop managing jewelry orders in DMs.
         </h1>
@@ -36,26 +32,34 @@ export default function Home() {
           across dozens of threads. You copy-paste into spreadsheets, miss messages, and lose
           customers.{' '}
           <span className='text-gray-900 font-semibold'>
-            OrderFlow gives you one shareable link. Customers fill in the details. You manage
-            everything in one place.
+            OrderFlow gives you one shareable link. Customers fill in the details.
+            You manage everything in one place.
           </span>
         </p>
-        <a
-          href={GOOGLE_FORM_URL}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors'
-        >
-          Join waitlist — free forever
-          <ArrowRight className='w-5 h-5' />
-        </a>
+
+        {/* Inline waitlist form */}
+        <WaitlistForm />
+
         <p className='mt-3 text-sm text-gray-400'>No credit card. No spam. Free forever for early members.</p>
 
-        {/* Waitlist counter */}
-        <div className='mt-6 inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-2 rounded-full'>
+        {/* Counter */}
+        <div className='mt-5 inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-2 rounded-full'>
           <Users className='w-4 h-4' />
           <span>{WAITLIST_COUNT} makers already on the waitlist</span>
         </div>
+
+        {/* Secondary: survey link */}
+        <p className='mt-6 text-sm text-gray-400'>
+          Help us build the right thing —{' '}
+          <a
+            href={GOOGLE_FORM_URL}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-indigo-500 hover:underline'
+          >
+            take our 2-min survey
+          </a>
+        </p>
       </section>
 
       {/* Pain points */}
@@ -108,7 +112,7 @@ export default function Home() {
             {
               step: '3',
               title: 'Manage everything in one dashboard',
-              desc: 'See all orders, update status, send a Stripe payment link, and draft replies with AI — in one place.',
+              desc: 'See all orders, update status, track from intake to delivery, send a payment link, and draft replies with AI.',
             },
           ].map(({ step, title, desc }) => (
             <li key={step} className='flex gap-5'>
@@ -127,25 +131,19 @@ export default function Home() {
       {/* CTA 2 */}
       <section className='bg-indigo-50 py-16 px-6 text-center'>
         <h2 className='text-2xl font-bold mb-4'>Join free — no catch</h2>
-        <p className='text-gray-600 mb-2 max-w-md mx-auto'>
-          Early members get OrderFlow <span className='font-semibold text-indigo-700'>free forever</span>.
+        <p className='text-gray-600 mb-3 max-w-md mx-auto'>
+          Early members get OrderFlow{' '}
+          <span className='font-semibold text-indigo-700'>free forever</span>.
           We&apos;re building this with you, not for you.
         </p>
         <div className='inline-flex items-center gap-2 text-sm text-indigo-600 font-medium mb-8'>
           <Users className='w-4 h-4' />
           {WAITLIST_COUNT} makers already joined
         </div>
-        <br />
-        <a
-          href={GOOGLE_FORM_URL}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors'
-        >
-          Join waitlist — it&apos;s free
-          <ArrowRight className='w-5 h-5' />
-        </a>
-        <p className='mt-3 text-sm text-gray-400'>No credit card. Cancel anytime.</p>
+        <div className='flex justify-center'>
+          <WaitlistForm />
+        </div>
+        <p className='mt-3 text-sm text-gray-400'>No credit card. No spam.</p>
       </section>
 
       {/* Profile */}
@@ -176,6 +174,7 @@ export default function Home() {
       <footer className='text-center text-xs text-gray-400 py-8'>
         © {new Date().getFullYear()} OrderFlow. Built for makers, by a maker.
       </footer>
+
     </main>
   );
 }
